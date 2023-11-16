@@ -54,3 +54,9 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<space><space>", "<cmd> :noh<CR>", { desc = "Clear search highlighting" })
+
+vim.keymap.set("n", "<leader>t", function()
+   vim.cmd("cd %:p:h")
+   vim.cmd("belowright split | terminal")
+   vim.cmd("startinsert")
+end, { desc = "Open terminal in folder of current file"})
