@@ -25,7 +25,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'K', function()
+      vim.lsp.buf.hover()
+      vim.api.nvim_command('hi clear Error')
+    end, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {})
     vim.keymap.set('n', 'gl', require('telescope.builtin').diagnostics, opts)
