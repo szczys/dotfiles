@@ -75,6 +75,14 @@ local plugins = {
   },
 
   {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      { {"mfussenegger/nvim-dap"} }
+    }
+  },
+  "theHamsta/nvim-dap-virtual-text",
+
+  {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
