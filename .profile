@@ -34,3 +34,4 @@ export MINICOM
 
 source /home/mike/compile/golioth-zephyr-workspace/zephyr/scripts/west_commands/completion/west-completion.bash
 
+. "$HOME/.cargo/env"

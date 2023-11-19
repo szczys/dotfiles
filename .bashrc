@@ -127,3 +127,4 @@ export PICO_EXTRAS_PATH=/home/mike/compile/pico/pico-extras
 export PICO_PLAYGROUND_PATH=/home/mike/compile/pico/pico-playground
 
 . ~/.fancy-git/prompt.sh
+. "$HOME/.cargo/env"

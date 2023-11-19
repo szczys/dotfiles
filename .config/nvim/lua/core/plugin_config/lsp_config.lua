@@ -10,6 +10,7 @@ require("mason-lspconfig").setup({
     "lua_ls",
     "marksman",
     "pyright",
+    "rust_analyzer",
     "yamlls"
   }
 })
@@ -69,6 +70,7 @@ require("lspconfig").lua_ls.setup {
 require("lspconfig").marksman.setup { capabilities = capabilities }
 require("lspconfig").pyright.setup { capabilities = capabilities }
 require("lspconfig").yamlls.setup { capabilities = capabilities }
+
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig
 -- require("lspconfig").lua_ls.setup {}
