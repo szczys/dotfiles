@@ -26,6 +26,8 @@ local plugins = {
   'edkolev/tmuxline.vim',
   'rose-pine/neovim',
   'tomasiser/vim-code-dark',
+  'folke/tokyonight.nvim',
+  'rebelot/kanagawa.nvim',
   'preservim/nerdcommenter',
   'whiteinge/diffconflicts',
   'simrat39/rust-tools.nvim',
