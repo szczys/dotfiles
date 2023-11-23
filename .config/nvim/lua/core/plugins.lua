@@ -32,6 +32,7 @@ local plugins = {
   'whiteinge/diffconflicts',
   'simrat39/rust-tools.nvim',
   'nvim-lua/plenary.nvim',
+  'lambdalisue/suda.vim',
 
   ---- Completion framework:
   --'hrsh7th/nvim-cmp',
