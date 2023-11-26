@@ -10,8 +10,7 @@ vim.keymap.set('n', '<C-l>', '<C-W>l', { desc = "Move to right pane" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without overwriting register"})
 
 -- Copy text to " register
-vim.keymap.set("n", "<leader>y", "\"+y", { desc = "Yank into \" register" })
-vim.keymap.set("v", "<leader>y", "\"+y", { desc = "Yank into \" register" })
+vim.keymap.set({"n", "v"}, "<leader>y", "\"+y", { desc = "Yank into \" register" })
 vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = "Yank into \" register" })
 
 -- Delete text to " register
