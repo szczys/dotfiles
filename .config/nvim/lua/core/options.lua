@@ -25,3 +25,9 @@ vim.opt.relativenumber = true
 -- Color the colum to the right of the limit
 vim.opt.colorcolumn = "+1"
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.md", "*.mdx", "*.rst"},
+  callback = function()
+    vim.opt.spell = true
+  end
+})
