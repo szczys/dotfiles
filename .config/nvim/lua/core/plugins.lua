@@ -22,7 +22,7 @@ local plugins = {
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
   'L3MON4D3/LuaSnip',
-  'airblade/vim-gitgutter',
+  'lewis6991/gitsigns.nvim',
   'edkolev/tmuxline.vim',
   'rose-pine/neovim',
   'tomasiser/vim-code-dark',
