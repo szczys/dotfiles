@@ -1,10 +1,10 @@
 vim.keymap.set('i', 'kj', '<Esc>', { desc = "Use 'kj' keys in quick succession for ESC" })
 
 -- remap pane navigation
-vim.keymap.set('n', '<C-j>', '<C-W>j', { desc = "Move to left pane" })
-vim.keymap.set('n', '<C-k>', '<C-W>k', { desc = "Move to upper pane" })
-vim.keymap.set('n', '<C-h>', '<C-W>h', { desc = "Move to lower pane" })
-vim.keymap.set('n', '<C-l>', '<C-W>l', { desc = "Move to right pane" })
+vim.keymap.set('n', '<C-j>', '<CMD>NavigatorDown<CR>', { desc = "Move to down pane" })
+vim.keymap.set('n', '<C-k>', '<CMD>NavigatorUp<CR>', { desc = "Move to up pane" })
+vim.keymap.set('n', '<C-h>', '<CMD>NavigatorLeft<CR>', { desc = "Move to left pane" })
+vim.keymap.set('n', '<C-l>', '<CMD>NavigatorRight<CR>', { desc = "Move to right pane" })
 
 -- Paste without overwriting register
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without overwriting register"})

@@ -33,6 +33,7 @@ local plugins = {
   'simrat39/rust-tools.nvim',
   'nvim-lua/plenary.nvim',
   'lambdalisue/suda.vim',
+  'numToStr/Navigator.nvim',
 
   ---- Completion framework:
   --'hrsh7th/nvim-cmp',
