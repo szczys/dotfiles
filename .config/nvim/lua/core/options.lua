@@ -31,3 +31,10 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     vim.opt.spell = true
   end
 })
+
+-- show trailing whitespace
+vim.opt.list = true
+vim.opt.listchars = { tab = '⍿·',
+                      trail = '●',
+                      extends = '…',
+                      precedes = '…' }
