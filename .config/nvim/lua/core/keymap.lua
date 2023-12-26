@@ -32,3 +32,6 @@ vim.keymap.set("n", "<leader>t", function()
    vim.cmd("belowright split | terminal")
    vim.cmd("startinsert")
 end, { desc = "Open terminal in folder of current file"})
+
+-- Find and replace visual selection using CTRL-r
+vim.keymap.set("v", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>")
