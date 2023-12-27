@@ -35,38 +35,6 @@ local plugins = {
   'lambdalisue/suda.vim',
   'numToStr/Navigator.nvim',
 
-  ---- Completion framework:
-  --'hrsh7th/nvim-cmp',
-
-  ---- LSP completion source:
-  --'hrsh7th/cmp-nvim-lsp',
-
-  ---- Useful completion sources:
-  --'hrsh7th/cmp-nvim-lua',
-  --'hrsh7th/cmp-nvim-lsp-signature-help',
-  --'hrsh7th/cmp-vsnip',
-  --'hrsh7th/cmp-path',
-  --'hrsh7th/cmp-buffer',
-  --'hrsh7th/vim-vsnip',
-
-  --{ "folke/neodev.nvim", opts = {} },
-
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-      }
-  },
-
   { 'rcarriga/nvim-dap-ui', dependencies = 'mfussenegger/nvim-dap' },
 
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
