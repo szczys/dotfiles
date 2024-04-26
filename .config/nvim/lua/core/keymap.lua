@@ -7,7 +7,7 @@ vim.keymap.set('n', '<C-h>', '<CMD>NavigatorLeft<CR>', { desc = "Move to left pa
 vim.keymap.set('n', '<C-l>', '<CMD>NavigatorRight<CR>', { desc = "Move to right pane" })
 
 -- Paste without overwriting register
-vim.keymap.set("v", "p", '"_dP', { desc = "Paste without overwriting register"})
+vim.keymap.set("v", "p", '"_dp', { desc = "Paste without overwriting register"})
 
 -- Copy text to " register
 vim.keymap.set({"n", "v"}, "<leader>y", "\"+y", { desc = "Yank into \" register" })
