@@ -8,7 +8,20 @@ vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
 vim.keymap.set('n', '<leader>ss', builtin.spell_suggest, {})
 
-require('telescope').setup{
+local actions = require "telescope.actions"
+require("telescope").setup {
+  pickers = {
+    buffers = {
+      mappings = {
+        n = {
+          ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
+        }
+      }
+    },
+    live_grep = {
+      initial_mode = "insert"
+    }
+  },
   defaults = {
     initial_mode = "normal"
   }
