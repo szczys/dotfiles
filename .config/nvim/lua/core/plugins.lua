@@ -25,7 +25,7 @@ local plugins = {
   'hrsh7th/cmp-buffer',
   'L3MON4D3/LuaSnip',
   'lewis6991/gitsigns.nvim',
-  'edkolev/tmuxline.vim',
+  --'edkolev/tmuxline.vim',
   'rose-pine/neovim',
   'tomasiser/vim-code-dark',
   'folke/tokyonight.nvim',
