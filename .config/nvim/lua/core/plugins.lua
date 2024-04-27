@@ -37,6 +37,7 @@ local plugins = {
   'lambdalisue/suda.vim',
   'numToStr/Navigator.nvim',
   'jakewvincent/mkdnflow.nvim',
+  'catppuccin/nvim',
 
   { 'rcarriga/nvim-dap-ui', dependencies = 'mfussenegger/nvim-dap' },
 
