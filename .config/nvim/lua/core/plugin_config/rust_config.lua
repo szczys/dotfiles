@@ -14,11 +14,5 @@ rt.setup({
     hover_actions = {
       auto_focus = true,
     }
-  },
-  dap = {
-    adapter = require('rust-tools.dap').get_codelldb_adapter(
-      '/home/mike/.local/share/nvim/mason/packages/codelldb/codelldb',
-      '/home/mike/.local/share/nvim/mason/packages/codelldb/extension/lldb/lib/liblldb.so'
-    )
   }
 })

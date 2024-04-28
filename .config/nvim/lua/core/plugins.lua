@@ -25,7 +25,6 @@ local plugins = {
   'hrsh7th/cmp-buffer',
   'L3MON4D3/LuaSnip',
   'lewis6991/gitsigns.nvim',
-  --'edkolev/tmuxline.vim',
   'rose-pine/neovim',
   'tomasiser/vim-code-dark',
   'folke/tokyonight.nvim',
@@ -38,8 +37,6 @@ local plugins = {
   'numToStr/Navigator.nvim',
   'jakewvincent/mkdnflow.nvim',
   'catppuccin/nvim',
-
-  { 'rcarriga/nvim-dap-ui', dependencies = 'mfussenegger/nvim-dap' },
 
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 
