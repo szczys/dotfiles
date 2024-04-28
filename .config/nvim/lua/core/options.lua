@@ -22,6 +22,9 @@ vim.opt.smartcase = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- scroll before reaching edge of screen
+vim.opt.scrolloff = 8
+
 -- Color the colum to the right of the limit
 vim.opt.colorcolumn = "+1"
 
