@@ -74,6 +74,8 @@ local plugins = {
       -- refer to the configuration section below
     }
   },
+
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 }
 
 require("lazy").setup(plugins, opts)
