@@ -29,7 +29,7 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "+1"
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"*.md", "*.mdx", "*.rst"},
+  pattern = {"*.md", "*.mdx", "*.rst", "*/COMMIT_EDITMSG"},
   callback = function()
     vim.opt.spell = true
   end
