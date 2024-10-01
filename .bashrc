@@ -129,4 +129,8 @@ export PICO_PLAYGROUND_PATH=/home/mike/compile/pico/pico-playground
 . ~/.fancy-git/prompt.sh
 . "$HOME/.cargo/env"
 
-eval $(keychain --eval --agents ssh id_rsa)
+if [[ "$(hostname)" = "nelson" ]]; then
+  eval $(keychain --eval --agents ssh id_ed25519)
+else
+  eval $(keychain --eval --agents ssh id_rsa)
+fi
