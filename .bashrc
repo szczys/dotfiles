@@ -128,3 +128,5 @@ export PICO_PLAYGROUND_PATH=/home/mike/compile/pico/pico-playground
 
 . ~/.fancy-git/prompt.sh
 . "$HOME/.cargo/env"
+
+eval $(keychain --eval --agents ssh id_rsa)
