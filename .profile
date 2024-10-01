@@ -1,4 +1,4 @@
-# ~/.profile: executed by the command interpreter for login shells.
+
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
 # see /usr/share/doc/bash/examples/startup-files for examples.
@@ -28,6 +28,7 @@ fi
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
 
 MINICOM='-con'
 export MINICOM
