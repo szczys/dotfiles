@@ -74,7 +74,9 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Run rofi
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d   exec rofi -show run
+bindsym Mod1+Tab exec rofi -show window
+bindsym Mod1+d   exec rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
