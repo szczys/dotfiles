@@ -161,6 +161,9 @@
     # Display indicators for URLs (U) and actions (A).
     show_indicators = yes
 
+    # Gap between notifications
+    gap_size = 4
+
     ### Icons ###
 
     # Align icons left/right/off
