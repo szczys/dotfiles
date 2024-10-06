@@ -19,7 +19,7 @@ meson install
 sudo apt install lxappearance
 
 # Enables lockscreen
-sudo apt install light-locker
+sudo apt install xss-lock
 
 # Polybar (for older distros, you shoud build from source)
 sudo apt install polybar
