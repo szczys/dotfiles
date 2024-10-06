@@ -31,8 +31,8 @@ exec --no-startup-id feh --bg-fill ~/Pictures/wallpaper/current.jpg
 
 # Startup-related
 exec --no-startup-id ~/.config/i3/arandr_settings.sh
-exec_always --no-startup-id picom -b --config ~/.config/picom
 exec --no-startup-id ~/.config/polybar/scripts/launch_polybar.sh
+exec_always --no-startup-id picom -b
 
 # Handle lock and sleep
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 04090e --nofork
