@@ -1,6 +1,5 @@
-vim.cmd [[ colorscheme catppuccin ]]
-
 require("catppuccin").setup({
+    transparent_background = true,
     integrations = {
         cmp = true,
         gitsigns = true,
@@ -13,3 +12,5 @@ require("catppuccin").setup({
         }
     }
 })
+
+vim.cmd [[ colorscheme catppuccin ]]
