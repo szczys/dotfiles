@@ -6,7 +6,6 @@ workspace_b=4
 
 #get focused
 focused_workspace=`i3-msg -t get_workspaces | jq '.[] | select(.focused==true)' | jq .num`
-notify-send "$focused_workspace"
 
 if [ $focused_workspace == $workspace_a ]; then
   i3-msg workspace $workspace_b
