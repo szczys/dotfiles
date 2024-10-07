@@ -56,8 +56,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86AudioPlay exec playerctl play-pause
 
 # Printscreen
-bindsym Print exec gnome-screenshot
-bindsym Shift+Print exec gnome-screenshot -a
+bindsym --release Print exec gnome-screenshot
+bindsym --release Shift+Print exec gnome-screenshot -a
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
