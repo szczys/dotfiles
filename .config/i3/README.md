@@ -32,4 +32,7 @@ sudo apt install keychain
 
 # For image background, install feh
 sudo apt install feh
+
+# For backlight control
+sudo apt install light
 ```
