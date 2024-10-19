@@ -59,6 +59,12 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym --release Print exec gnome-screenshot
 bindsym --release Shift+Print exec gnome-screenshot -a
 
+# Backlight keys
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 \
+&& notify-send "Backlight Level" $(light -G) -h string:x-canonical-private-synchronous:backlight
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 \
+&& notify-send "Backlight Level" $(light -G) -h string:x-canonical-private-synchronous:backlight
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
