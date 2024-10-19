@@ -35,4 +35,7 @@ sudo apt install feh
 
 # For backlight control
 sudo apt install light
+
+# For auto-mounting USB devices
+sudo apt install udiskie
 ```
