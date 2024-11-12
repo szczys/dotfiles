@@ -15,6 +15,11 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:Sauce Code Pro Nerd Font 14
 
+# Change to window when focus is requested
+focus_on_window_activation focus
+for_window [urgent="latest"] focus
+
+
 # Don't show window titles
 default_border pixel 3
 
