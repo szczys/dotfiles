@@ -42,6 +42,7 @@ exec --no-startup-id udiskie
 
 # Handle lock and sleep
 exec --no-startup-id ~/.config/i3/lockscreen.sh
+exec --no-startup-id caffeine-indicator
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
