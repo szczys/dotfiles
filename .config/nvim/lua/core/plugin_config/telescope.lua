@@ -12,6 +12,7 @@ local actions = require "telescope.actions"
 require("telescope").setup {
   pickers = {
     buffers = {
+      initial_mode = "insert",
       mappings = {
         n = {
           ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
@@ -23,6 +24,8 @@ require("telescope").setup {
     }
   },
   defaults = {
-    initial_mode = "normal"
+    initial_mode = "normal",
+    layout_config = { prompt_position = "top" },
+    sorting_strategy = "ascending"
   }
 }
