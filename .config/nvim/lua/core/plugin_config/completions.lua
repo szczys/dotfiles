@@ -24,5 +24,9 @@ cmp.setup({
       { name = 'luasnip' },
       { name = 'buffer' },
       { name = 'path' },
-    })
+    }),
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
 })

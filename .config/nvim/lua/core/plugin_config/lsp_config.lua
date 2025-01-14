@@ -51,12 +51,38 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require("lspconfig").bashls.setup { capabilities = capabilities }
-require("lspconfig").clangd.setup { capabilities = capabilities }
-require("lspconfig").cmake.setup { capabilities = capabilities }
-require("lspconfig").cssls.setup { capabilities = capabilities }
-require("lspconfig").dockerls.setup { capabilities = capabilities }
-require("lspconfig").jsonls.setup { capabilities = capabilities }
+-- Specify how the border looks like
+local border = {
+    { '┌', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '┐', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+    { '┘', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '└', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+}
+
+-- Add the border on hover and on signature help popup window
+local handlers = {
+    ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+    ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+}
+
+-- Add border to the diagnostic popup window
+vim.diagnostic.config({
+    virtual_text = {
+        prefix = '■ ', -- Could be '●', '▎', 'x', '■', , 
+    },
+    float = { border = border },
+})
+
+require("lspconfig").bashls.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").clangd.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").cmake.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").cssls.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").dockerls.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").jsonls.setup { capabilities = capabilities, handlers = handlers }
 require("lspconfig").lua_ls.setup {
   settings = {
     Lua = {
@@ -65,12 +91,12 @@ require("lspconfig").lua_ls.setup {
       }
     }
   },
-  capabilities = capabilities
+  capabilities = capabilities,
+  handlers = handlers
 }
-require("lspconfig").marksman.setup { capabilities = capabilities }
-require("lspconfig").pyright.setup { capabilities = capabilities }
-require("lspconfig").yamlls.setup { capabilities = capabilities }
-
+require("lspconfig").marksman.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").pyright.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").yamlls.setup { capabilities = capabilities, handlers = handlers }
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig
 -- require("lspconfig").lua_ls.setup {}
