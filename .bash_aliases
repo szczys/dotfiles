@@ -4,4 +4,7 @@ alias config='/usr/bin/git --git-dir=/home/mike/.cfg/.git/ --work-tree=/home/mik
 alias vimdiff='nvim -d'
 alias fix-ssh='eval $(ssh-agent -s); ssh-add'
 alias erase-1024='JLinkExe -nogui 1 -if swd -speed auto -device MIMXRT1024XXX5A -CommanderScript /home/mike/golioth-compile/erase_mimxrt1024_evk.jlink'
+alias erase-rak='gdb -ex "set confirm off" -ex "target extended-remote /dev/ttyACM1" -ex "monitor swdp_scan" -ex "attach 1" -ex "monitor erase_mass" -ex "kill" -ex "quit" -silent'
 alias getscreen='scrot --delay 5 -p'
+alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
+alias idf-source='source ~/compile/esp-idf/export.sh'
