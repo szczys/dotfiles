@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #toggle between these workspaces:
-workspace_a=3
-workspace_b=4
+workspace_a=4
+workspace_b=3
 
 #get focused
 focused_workspace=`i3-msg -t get_workspaces | jq '.[] | select(.focused==true)' | jq .num`

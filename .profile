@@ -36,3 +36,7 @@ export MINICOM
 source /home/mike/compile/golioth-zephyr-workspace/zephyr/scripts/west_commands/completion/west-completion.bash
 
 . "$HOME/.cargo/env"
+
+if [ -d "$HOME/adb-fastboot/platform-tools" ] ; then
+ export PATH="$HOME/adb-fastboot/platform-tools:$PATH"
+fi
