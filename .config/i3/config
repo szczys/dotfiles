@@ -210,3 +210,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# Include host-specific config
+include ~/.config/i3/`hostname`.conf
