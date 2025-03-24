@@ -9,7 +9,7 @@ require("mason-lspconfig").setup({
     "jsonls",
     "lua_ls",
     "marksman",
-    "pyright",
+    "ruff",
     "rust_analyzer",
     "yamlls"
   }
@@ -95,7 +95,14 @@ require("lspconfig").lua_ls.setup {
   handlers = handlers
 }
 require("lspconfig").marksman.setup { capabilities = capabilities, handlers = handlers }
-require("lspconfig").pyright.setup { capabilities = capabilities, handlers = handlers }
+require("lspconfig").ruff.setup { capabilities = capabilities,
+                                  handlers = handlers,
+                                  init_options = {
+                                    settings = {
+                                      organizeImports = false
+                                    }
+                                  }
+                                }
 require("lspconfig").yamlls.setup { capabilities = capabilities, handlers = handlers }
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig
