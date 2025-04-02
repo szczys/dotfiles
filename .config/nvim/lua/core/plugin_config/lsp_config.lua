@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', function()
-      vim.lsp.buf.hover()
+      vim.lsp.buf.hover( { border = 'rounded' })
       vim.api.nvim_command('hi clear Error')
     end, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
@@ -65,17 +65,9 @@ local border = {
 
 -- Add the border on hover and on signature help popup window
 local handlers = {
-  ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+  ['textDocument/hover'] = vim.lsp.with(vim.lsp.buf.hover, { border = border }),
   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 }
-
--- Add border to the diagnostic popup window
-vim.diagnostic.config({
-  virtual_text = {
-    prefix = '■ ', -- Could be '●', '▎', 'x', '■', , 
-  },
-  float = { border = border },
-})
 
 require("lspconfig").bashls.setup { capabilities = capabilities, handlers = handlers }
 require("lspconfig").clangd.setup { capabilities = capabilities, handlers = handlers }
