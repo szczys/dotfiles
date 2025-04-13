@@ -40,6 +40,9 @@ exec --no-startup-id ~/.config/polybar/scripts/launch_polybar.sh
 exec_always --no-startup-id picom -b
 exec --no-startup-id udiskie
 
+# Allow gui programs to ask for root permissions
+exec --no-startup-id /usr/bin/lxpolkit
+
 # Handle lock and sleep
 exec --no-startup-id ~/.config/i3/lockscreen.sh
 exec --no-startup-id caffeine-indicator
