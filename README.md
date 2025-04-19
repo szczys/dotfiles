@@ -21,3 +21,10 @@ The patterns used to version control my dotfiles are based on:
 4. `alias config='/usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME'`
 5. `config config --local status.showUntrackedFiles no`
 6. `config checkout`
+
+## Using Fish shell
+
+```
+sudo apt install fish
+curl -sS https://starship.rs/install.sh | sh
+```
