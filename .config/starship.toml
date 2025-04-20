@@ -6,14 +6,6 @@ $time\
 [](fg:surface0 bg:green)\
 $username\
 [](fg:green bg:blue)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
 $python\
 [](bg:lavender fg:blue)\
 $directory\
@@ -129,46 +121,6 @@ modified = "[ ](fg:#FFFF00 bg:surface0)"
 staged = "[ ](fg:#67AC32 bg:surface0)"
 conflicted = "[ ](fg:FF0000 bg:surface0)"
 stashed = ""
-
-[nodejs]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[c]
-symbol = " "
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[rust]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[golang]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[php]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[java]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[kotlin]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
-
-[haskell]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol( $version) ](fg:surface0 bg:blue)]($style)'
 
 [python]
 symbol = ""
