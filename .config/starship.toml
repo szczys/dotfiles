@@ -175,6 +175,7 @@ symbol = ""
 style = "bg:blue"
 format = '[[ $symbol ](fg:surface0 bg:blue)]($style)'
 pyenv_version_name = false
+detect_extensions = []
 
 [docker_context]
 symbol = ""
