@@ -24,6 +24,7 @@ $git_status\
 $docker_context\
 $conda\
 [](fg:surface2)\
+$status \
 $line_break$character"""
 
 palette = 'catppuccin_mocha'
@@ -201,3 +202,9 @@ vimcmd_symbol = '[](bold fg:color_green)'
 vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
 vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:blue)'
+
+[status]
+disabled = false
+style = "bg:surface2"
+symbol = ""
+format = '[[](red)[ERR: $status](fg:base bg:red)[](red)]($style)'
