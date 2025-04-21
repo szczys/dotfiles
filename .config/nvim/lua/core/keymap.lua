@@ -39,3 +39,7 @@ end, { desc = "Open terminal in folder of current file"})
 
 -- Find and replace visual selection using CTRL-r
 vim.keymap.set("v", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>")
+
+-- Format Markdown table (use `vip` to select table first)
+vim.keymap.set('v', '<leader>f', '!pandoc -t markdown-simple_tables<CR>',
+  { silent = true, desc = 'Align selected md table using pandoc; use `vip` to select table' })
