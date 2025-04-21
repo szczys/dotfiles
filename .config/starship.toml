@@ -7,12 +7,12 @@ $time\
 $username\
 [](fg:green bg:blue)\
 $python\
-[](bg:lavender fg:blue)\
-$directory\
-[](fg:lavender bg:surface0)\
+[](bg:surface0 fg:blue)\
 $git_branch\
 $git_status\
-[](fg:surface0 bg:surface2)\
+[](bg:lavender fg:surface0)\
+$directory\
+[](fg:lavender bg:surface2)\
 $docker_context\
 $conda\
 [](fg:surface2)\
@@ -70,10 +70,13 @@ format = '[[ $symbol $branch ](bold fg:text bg:surface0)]($style)'
 [git_status]
 style = "bg:surface0"
 format = '[[($all_status$ahead_behind )](fg:text bg:surface0)]($style)'
-untracked = "[ ](fg:#4490DA bg:surface0 )"
-modified = "[ ](fg:#FFFF00 bg:surface0)"
+untracked = "[ ](fg:#4490DA bg:surface0 )"
+modified = "[ ](fg:#FFFF00 bg:surface0)"
 staged = "[ ](fg:#67AC32 bg:surface0)"
 conflicted = "[ ](fg:FF0000 bg:surface0)"
+ahead = "[󰁞 ](fg:text gb:surface0)"
+behind = "[󰁆 ](fg:text gb:surface0)"
+diverged = "[ ](fg:text gb:surface0)"
 stashed = ""
 
 [python]
