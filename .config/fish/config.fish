@@ -14,3 +14,10 @@ alias idf-source='source ~/compile/esp-idf/export.sh'
 # Git aliases
 alias gs='git status'
 alias glp="git log --date=short --pretty=format:'%C(bold yellow)%h%C(reset) %C(white)%ad %C(bold blue)(%ar)%C(reset) %C(bold green)%an %C(reset)%C(cyan)%s%C(reset)'"
+
+# Handle
+if test "$hostname" = "nelson"
+  eval (keychain --eval --agents ssh id_ed25519)
+else
+  eval (keychain --eval --agents ssh id_rsa)
+end
