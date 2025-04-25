@@ -1,5 +1,18 @@
 starship init fish | source
 
+# Abbreviations
+abbr -a -U -- ll 'ls -lah'
+
+# Git Abbreviations
+abbr -a -U -- gco 'git checkout'
+abbr -a -U -- gd 'git diff'
+abbr -a -U -- gdc 'git diff --cached'
+abbr -a -U -- gl 'git log'
+abbr -a -U -- gs 'git status'
+
+# Git Aliases
+alias glp="git log --date=short --pretty=format:'%C(bold yellow)%h%C(reset) %C(white)%ad %C(bold blue)(%ar)%C(reset) %C(bold green)%an %C(reset)%C(cyan)%s%C(reset)'"
+
 # Aliases
 alias vim='nvim'
 alias vact='source .venv/bin/activate.fish'
@@ -11,9 +24,6 @@ alias getscreen='scrot --delay 5 -p'
 alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
 alias idf-source='source ~/compile/esp-idf/export.sh'
 
-# Git aliases
-alias gs='git status'
-alias glp="git log --date=short --pretty=format:'%C(bold yellow)%h%C(reset) %C(white)%ad %C(bold blue)(%ar)%C(reset) %C(bold green)%an %C(reset)%C(cyan)%s%C(reset)'"
 
 # Handle
 if test "$hostname" = "nelson"
