@@ -24,10 +24,29 @@ alias getscreen='scrot --delay 5 -p'
 alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
 alias idf-source='source ~/compile/esp-idf/export.sh'
 
+# Set colors in minicom by default
+set MINICOM "-con"
 
-# Handle
+# Handle ssh-agent
 if test "$hostname" = "nelson"
   eval (keychain --eval --agents ssh id_ed25519)
 else
   eval (keychain --eval --agents ssh id_rsa)
+end
+
+# set PATH so it includes user's private bin if it exists
+if test -d $HOME/bin
+  set -U fish_user_paths $HOME/bin $fish_user_paths
+end
+
+# set PATH so it includes user's private bin if it exists
+if test -d $HOME/.local/bin
+  set -U fish_user_paths $HOME/.local/bin $fish_user_paths
+end
+
+# set GOPATH and add to PATH if it exists
+if test -d $HOME/.local/bin
+  set -U GOPATH $HOME/go
+  set -U fish_user_paths $HOME/$GOPATH/bin $fish_user_paths
+  set -U fish_user_paths /usr/local/go/bin $fish_user_paths
 end
