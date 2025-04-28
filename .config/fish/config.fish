@@ -25,7 +25,7 @@ alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
 alias idf-source='source ~/compile/esp-idf/export.sh'
 
 # Set colors in minicom by default
-set MINICOM "-con"
+set -U MINICOM "--color=on"
 
 # Handle ssh-agent
 if test "$hostname" = "nelson"
