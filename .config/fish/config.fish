@@ -50,3 +50,6 @@ if test -d $HOME/.local/bin
   set -U fish_user_paths $HOME/$GOPATH/bin $fish_user_paths
   set -U fish_user_paths /usr/local/go/bin $fish_user_paths
 end
+
+# set NPM version
+nvm use lts
