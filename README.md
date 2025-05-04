@@ -22,9 +22,21 @@ The patterns used to version control my dotfiles are based on:
 5. `config config --local status.showUntrackedFiles no`
 6. `config checkout`
 
-## Using Fish shell
+## Install dependencies
 
 ```
+# Using Fish shell
 sudo apt install fish
 curl -sS https://starship.rs/install.sh | sh
+
+# Tmux Plugin Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Press Leader+I to install plugins
+
+# Install nvm
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+fisher install jorgebucaran/nvm.fish
+
 ```
+
+
