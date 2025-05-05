@@ -51,5 +51,8 @@ if test -d $HOME/.local/bin
   set -U fish_user_paths /usr/local/go/bin $fish_user_paths
 end
 
+# Use kj for escape
+set fish_key_bindings fish_user_key_bindings
+
 # set NPM version
 nvm use lts
