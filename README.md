@@ -37,6 +37,11 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 fisher install jorgebucaran/nvm.fish
 
+# Install node
+nvm install lts
+nvm use lts
+
+# Install Markdown.preview
+# Inside nvim, run the following:
+:call mkdp#util#install()
 ```
-
-
