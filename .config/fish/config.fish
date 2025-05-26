@@ -42,8 +42,7 @@ if status is-interactive; and test (uname) = Linux
         ~/.ssh/id_rsa
   end
 
-  SHELL=fish keychain --agents "gpg,ssh" --eval $SSH_PRIVATE_KEYS $GPG_PRIVATE_KEYS \
-      | source
+  SHELL=fish keychain --eval $SSH_PRIVATE_KEYS | source
 
   # set NPM version
   nvm use lts
