@@ -22,6 +22,7 @@ alias erase-rak='gdb -ex "set confirm off" -ex "target extended-remote /dev/ttyA
 alias getscreen='scrot --delay 5 -p'
 alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
 alias idf-source='source ~/compile/esp-idf/export.sh'
+alias loom-converter='~/compile/linux-automation/loom-converter/loom_convert.sh'
 
 # Set colors in minicom by default
 set -Ux MINICOM "--color=on"
