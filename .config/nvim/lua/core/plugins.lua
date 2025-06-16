@@ -37,6 +37,7 @@ local plugins = {
   'numToStr/Navigator.nvim',
   'jakewvincent/mkdnflow.nvim',
   'catppuccin/nvim',
+  'tpope/vim-fugitive',
 
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 
