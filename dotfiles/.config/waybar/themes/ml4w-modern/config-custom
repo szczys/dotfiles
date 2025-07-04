@@ -24,6 +24,11 @@
         "~/.config/waybar/modules.json"
     ],
 
+    "pulseaudio": {
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+
     // Modules Left
     "modules-left": [
 "custom/appmenu",
@@ -45,8 +50,8 @@
         "custom/updates",
         "pulseaudio",
 //"backlight",
-        "bluetooth",
-"network",
+        //"bluetooth",
+//"network",
         "battery", 
         "power-profiles-daemon",
         "group/hardware",
