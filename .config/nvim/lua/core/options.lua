@@ -28,6 +28,9 @@ vim.opt.scrolloff = 8
 -- Color the colum to the right of the limit
 vim.opt.colorcolumn = "+1"
 
+-- Add borders to floats by default
+vim.o.winborder = 'rounded'
+
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.md", "*.mdx", "*.rst", "*/COMMIT_EDITMSG"},
   callback = function()
