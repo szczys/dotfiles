@@ -9,6 +9,7 @@ abbr -a gd 'git diff'
 abbr -a gdc 'git diff --cached'
 abbr -a gl 'git log'
 abbr -a gs 'git status'
+abbr -a wu 'west update --narrow -o=--depth=1'
 
 # Git Aliases
 alias glp="git log --date=short --pretty=format:'%C(bold yellow)%h%C(reset) %C(white)%ad %C(bold blue)(%ar)%C(reset) %C(bold green)%an %C(reset)%C(cyan)%s%C(reset)'"
