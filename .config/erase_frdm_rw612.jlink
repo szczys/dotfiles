@@ -1,0 +1,8 @@
+r
+h
+exec EnableEraseAllFlashBanks
+erase 0x8000000 0x8624000
+sleep 30
+r
+sleep 3
+q
