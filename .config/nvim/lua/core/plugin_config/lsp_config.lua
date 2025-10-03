@@ -15,6 +15,10 @@ require("mason-lspconfig").setup({
   }
 })
 
+require('lspconfig.ui.windows').default_options = {
+  border = "rounded"
+}
+
 vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
