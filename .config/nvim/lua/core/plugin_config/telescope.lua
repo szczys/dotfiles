@@ -1,4 +1,5 @@
 local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fp', builtin.builtin, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -12,19 +13,15 @@ local actions = require "telescope.actions"
 require("telescope").setup {
   pickers = {
     buffers = {
-      initial_mode = "insert",
       mappings = {
         n = {
           ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
         }
       }
     },
-    live_grep = {
-      initial_mode = "insert"
-    }
   },
   defaults = {
-    initial_mode = "normal",
+    initial_mode = "insert",
     layout_config = { prompt_position = "top" },
     sorting_strategy = "ascending"
   }
