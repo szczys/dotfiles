@@ -38,6 +38,7 @@ local plugins = {
   'jakewvincent/mkdnflow.nvim',
   'catppuccin/nvim',
   'tpope/vim-fugitive',
+  'nvim-treesitter/nvim-treesitter-context',
 
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 
