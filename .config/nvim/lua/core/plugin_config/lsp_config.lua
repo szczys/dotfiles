@@ -15,10 +15,6 @@ require("mason-lspconfig").setup({
   }
 })
 
-require('lspconfig.ui.windows').default_options = {
-  border = "rounded"
-}
-
 vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
@@ -58,5 +54,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
