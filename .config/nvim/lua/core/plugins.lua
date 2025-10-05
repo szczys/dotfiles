@@ -17,13 +17,6 @@ local plugins = {
   'nvim-treesitter/nvim-treesitter',
   'kylechui/nvim-surround',
   'windwp/nvim-autopairs',
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-buffer',
-  'L3MON4D3/LuaSnip',
-  'saadparwaiz1/cmp_luasnip',
-  'rafamadriz/friendly-snippets',
   'lewis6991/gitsigns.nvim',
   'rose-pine/neovim',
   'tomasiser/vim-code-dark',
@@ -31,7 +24,6 @@ local plugins = {
   'rebelot/kanagawa.nvim',
   'preservim/nerdcommenter',
   'whiteinge/diffconflicts',
-  'simrat39/rust-tools.nvim',
   'nvim-lua/plenary.nvim',
   'lambdalisue/suda.vim',
   'numToStr/Navigator.nvim',
@@ -98,6 +90,27 @@ local plugins = {
       "MunifTanjim/nui.nvim",
       -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
     }
+  },
+  {
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    version = "1.*",
+    opts = {
+      keymap = { preset = "super-tab" },
+
+      appearance = {
+        nerd_font_variant = "mono"
+      },
+
+      completion = { documentation = { auto_show = true } },
+
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+
+      fuzzy = { implementation = "prefer_rust_with_warning" }
+    },
+    opts_extend = { "sources.default" }
   },
 }
 
