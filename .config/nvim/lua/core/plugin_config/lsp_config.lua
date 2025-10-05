@@ -54,5 +54,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
-
-vim.diagnostic.config({ virtual_lines = { current_line = true }})
