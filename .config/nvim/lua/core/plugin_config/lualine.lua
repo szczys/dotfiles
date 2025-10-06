@@ -33,7 +33,7 @@ require('lualine').setup {
     theme = 'auto',
   },
   sections = {
-    lualine_b = { 'filename' },
+    lualine_b = { {'filename', path = 1, file_status=false} },
     lualine_c = { custom_fname },
   }
 }
