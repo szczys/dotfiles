@@ -32,8 +32,6 @@ local plugins = {
   'tpope/vim-fugitive',
   'nvim-treesitter/nvim-treesitter-context',
 
-  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
-
   {
     -- Install markdown preview, use npx if available.
     "iamcco/markdown-preview.nvim",
