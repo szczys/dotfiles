@@ -30,7 +30,6 @@ local plugins = {
   'jakewvincent/mkdnflow.nvim',
   'catppuccin/nvim',
   'tpope/vim-fugitive',
-  'nvim-treesitter/nvim-treesitter-context',
 
   {
     -- Install markdown preview, use npx if available.

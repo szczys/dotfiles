@@ -9,7 +9,6 @@ require("core.plugin_config.nvim-autopairs")
 require("core.plugin_config.nvim-neoclip")
 require("core.plugin_config.nvim-neo-tree")
 require("core.plugin_config.nvim-surround")
-require("core.plugin_config.nvim-treesitter-context")
 require("core.plugin_config.telescope")
 require("core.plugin_config.treesitter")
 
