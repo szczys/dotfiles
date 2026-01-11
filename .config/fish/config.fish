@@ -52,6 +52,11 @@ if status is-interactive; and test (uname) = Linux
   nvm use lts
 end
 
+# symlink hyprland files based on host
+if not test -f ~/.config/hypr/conf/custom-by-hostname.conf
+  ln -s ~/.mydotfiles/com.ml4w.dotfiles/.config/hypr/conf/custom-$hostname.conf ~/.config/hypr/conf/custom-by-hostname.conf
+end
+
 # set PATH so it includes user's private bin if it exists
 if test -d $HOME/bin
   set -U fish_user_paths $HOME/bin $fish_user_paths
