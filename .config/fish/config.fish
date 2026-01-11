@@ -25,6 +25,7 @@ alias getscreen='scrot --delay 5 -p'
 alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
 alias idf-source='source ~/compile/esp-idf/export.sh'
 alias loom-converter='~/compile/linux-automation/loom-converter/loom_convert.sh'
+alias lost='git for-each-ref --sort=-committerdate refs/heads | less'
 alias tz-update='timedatectl set-timezone "$(curl --fail https://ipapi.co/timezone)"'
 
 # Set colors in minicom by default
