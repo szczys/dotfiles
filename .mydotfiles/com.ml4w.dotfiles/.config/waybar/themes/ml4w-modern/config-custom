@@ -7,11 +7,19 @@
     "margin-left": 0,
     "margin-right": 0,
     "spacing": 0,
+
     // Load Modules
     "include": [
         "~/.config/ml4w/settings/waybar-quicklinks.json",
         "~/.config/waybar/modules.json"
     ],
+
+
+    "pulseaudio": {
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+
     // Modules Left
     "modules-left": [
         "custom/appmenu",
@@ -21,11 +29,13 @@
         //"custom/nowplaying",        
         "custom/empty"
     ],
+
     // Modules Center
     "modules-center": [
         "hyprland/window",
         "custom/empty"
     ],
+
     // Modules Right    
     "modules-right": [
         "custom/updates",
