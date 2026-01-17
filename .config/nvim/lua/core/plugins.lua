@@ -30,6 +30,7 @@ local plugins = {
   'jakewvincent/mkdnflow.nvim',
   'catppuccin/nvim',
   'tpope/vim-fugitive',
+  'github/copilot.vim',
 
   {
     -- Install markdown preview, use npx if available.
