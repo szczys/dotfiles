@@ -3,7 +3,6 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "bashls",
     "clangd",
-    "cmake",
     "cssls",
     "dockerls",
     "jsonls",
