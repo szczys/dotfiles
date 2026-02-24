@@ -2,7 +2,7 @@ alias vim=nvim
 alias vact='source .venv/bin/activate'
 alias config='/usr/bin/git --git-dir=/home/mike/.cfg/.git/ --work-tree=/home/mike'
 alias vimdiff='nvim -d'
-alias fix-ssh='/usr/bin/keychain $HOME/.ssh/id_rsa && source $HOME/.keychain/$HOSTNAME-sh'
+alias fix-ssh='/usr/bin/keychain $HOME/.ssh/id_ed25519 && source $HOME/.keychain/$HOSTNAME-sh'
 alias erase-rak='gdb -ex "set confirm off" -ex "target extended-remote /dev/ttyACM1" -ex "monitor swdp_scan" -ex "attach 1" -ex "monitor erase_mass" -ex "kill" -ex "quit" -silent'
 alias getscreen='scrot --delay 5 -p'
 alias fix-camera='~/compile/linux-automation/c920webcam/setup_webcam.sh'
