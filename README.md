@@ -33,6 +33,9 @@ curl -sS https://starship.rs/install.sh | sh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Press Leader+I to install plugins
 
+# Probably needed for nvim treesitter:
+paru -S tree-sitter
+
 # Install nvm
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 fisher install jorgebucaran/nvm.fish
@@ -40,6 +43,12 @@ fisher install jorgebucaran/nvm.fish
 # Install node
 nvm install lts
 nvm use lts
+
+# Fix missing glyphs from Nerdfonts (requires reboot)
+paru -S noto-fonts noto-fonts-cjk noto-fonts-emoji
+
+# Fix laptop audio
+paru -S sof-firmware
 
 # Install Markdown.preview
 # Inside nvim, run the following:
