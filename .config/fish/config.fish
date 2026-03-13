@@ -28,6 +28,8 @@ alias loom-converter='~/compile/linux-automation/loom-converter/loom_convert.sh'
 alias lost='git for-each-ref --sort=-committerdate refs/heads | less'
 alias tz-update='timedatectl set-timezone "$(curl --fail https://ipapi.co/timezone)"'
 alias fix-workspace='~/.config/hypr/scripts/fix-workspaces.sh'
+alias screenoff='hyprctl keyword monitor eDP-1, disable'
+alias screenon='hyprctl keyword monitor eDP-1, enable'
 
 # Set colors in minicom by default
 set -Ux MINICOM "--color=on"
