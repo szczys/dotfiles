@@ -30,7 +30,7 @@ local plugins = {
   'jakewvincent/mkdnflow.nvim',
   'catppuccin/nvim',
   'tpope/vim-fugitive',
-  'github/copilot.vim',
+  'zbirenbaum/copilot.lua',
   'fang2hou/blink-copilot',
 
   {
@@ -89,6 +89,19 @@ local plugins = {
       "MunifTanjim/nui.nvim",
       -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
     }
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
   },
   {
     "saghen/blink.cmp",
