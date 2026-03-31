@@ -221,7 +221,7 @@
   },
   // Clock
   "clock": {
-    "format": "{:%H:%M %a}",
+    "format": "{:%b %d - %I:%M}",
     "on-click": "qs ipc call calendar toggle",
     "timezone": "",
     "tooltip": false
