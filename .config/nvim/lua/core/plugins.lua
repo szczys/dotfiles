@@ -33,6 +33,25 @@ local plugins = {
   'zbirenbaum/copilot.lua',
   'fang2hou/blink-copilot',
 
+  'nvim-telescope/telescope-ui-select.nvim', -- Used by CopilotChat
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    opts = {
+      -- See Configuration section for options
+      mappings = {
+        reset = {
+          normal = "<C-q>",
+          insert = "<C-q>",
+        },
+      },
+    },
+  },
+
+
   {
     -- Install markdown preview, use npx if available.
     "iamcco/markdown-preview.nvim",
