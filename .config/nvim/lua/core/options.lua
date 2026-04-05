@@ -1,6 +1,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Providers
+vim.g.python3_host_prog = '/usr/bin/python3'
+vim.g.perl_host_prog = '/usr/bin/perl'
+
 vim.opt.backspace = '2'
 vim.opt.showcmd = true
 vim.opt.laststatus = 2
