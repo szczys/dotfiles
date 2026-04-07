@@ -47,7 +47,7 @@ return {
       vim.lsp.enable('yamlls')
 
       -- Disable logging
-      vim.lsp.set_log_level("off")
+      vim.lsp.log.set_level("off")
 
       -- Keymap
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
