@@ -1,10 +1,14 @@
 return {
-  "bluz71/vim-nightfly-colors",
-  name = "nightfly",
+  "olimorris/onedarkpro.nvim",
   lazy = false,
   priority = 1000,
   config = function ()
-    vim.g.nightflyTransparent = true
-    vim.cmd [[colorscheme nightfly]]
+    require("onedarkpro").setup({
+      options = {
+        transparency = true,
+      },
+    })
+
+    vim.cmd [[colorscheme onedark]]
   end,
 }
