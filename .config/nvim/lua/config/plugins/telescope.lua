@@ -2,6 +2,8 @@ return {
   'nvim-telescope/telescope.nvim', version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope-ui-select.nvim',
+
     -- optional but recommended
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
@@ -24,6 +26,9 @@ return {
         sorting_strategy = "ascending"
       }
     }
+
+    -- Use Telescopoe as default vim.ui.select
+    require("telescope").load_extension("ui-select")
 
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>fp', builtin.builtin, {})
