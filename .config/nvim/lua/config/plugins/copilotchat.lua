@@ -16,5 +16,6 @@ return {
   },
   config = function ()
     vim.opt.splitright = true
+    vim.keymap.set('n', '<leader>ac', '<CMD>CopilotChat<CR>', { desc = "Show CopilotChat window"})
   end,
 }
