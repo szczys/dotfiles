@@ -19,6 +19,13 @@ abbr -a gl 'git log'
 abbr -a gs 'git status'
 abbr -a wu 'west update --narrow -o=--depth=1'
 
+# Fix menuconfig colors
+## These are the stock colors:
+#set -gx MENUCONFIG_STYLE "path=fg:#000000,bg:#e5e5e5,bold separator=fg:#000000,bg:#cdcd00,bold list=fg:#000000,bg:#e5e5e5 selection=fg:#e5e5e5,bg:#0000cd,bold inv-list=fg:#cd0000,bg:#e5e5e5 inv-selection=fg:#cd0000,bg:#0000cd help=fg:#000000,bg:#e5e5e5,bold show-help=fg:#000000,bg:#e5e5e5 frame=fg:#000000,bg:#cdcd00,bold body=fg:#e5e5e5,bg:#000000 edit=fg:#e5e5e5,bg:#0000cd jump-edit=fg:#e5e5e5,bg:#0000cd text=fg:#000000,bg:#e5e5e5"
+
+## These are ESP-IDF's dark mode inspired colors:
+set -gx MENUCONFIG_STYLE "path=fg:#d9d9d9,bg:#272727,bold separator=fg:#000000,bg:#fea62b,bold list=fg:#e0e0e0,bg:#121212 selection=fg:#ffffff,bg:#0178d4,bold inv-list=fg:#9a9acc,bg:#121212 inv-selection=fg:#000000,bg:#9a9acc help=fg:#e0e0e0,bg:#121212 show-help=fg:#e0e0e0,bg:#121212 frame=fg:#000000,bg:#fea62b,bold body=fg:#e0e0e0,bg:#121212 edit=fg:#e0e0e0,bg:#1e1e1e jump-edit=fg:#ffffff,bg:#0178d4,bold text=fg:#e0e0e0,bg:#1e1e1e"
+
 # Git Aliases
 alias glp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
