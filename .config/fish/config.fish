@@ -1,4 +1,12 @@
+# Use starship for status bar
 starship init fish | source
+
+# Use fzf for completion (CTRL-T for files, CTRL-R for history)
+fzf --fish | source
+if test -f ~/.config/fzf-git.sh/fzf-git.fish;
+  # Add git bindings (https://github.com/junegunn/fzf-git.sh)
+  source ~/.config/fzf-git.sh/fzf-git.fish;
+end
 
 # Abbreviations
 abbr -a ll 'ls -lah'

@@ -53,4 +53,8 @@ paru -S sof-firmware
 # Install Markdown.preview
 # Inside nvim, run the following:
 :call mkdp#util#install()
+
+# Set up fzf for fish shell
+paru -S bat
+git clone https://github.com/junegunn/fzf-git.sh.git ~/.config/fzf-git.sh
 ```
