@@ -1,0 +1,7 @@
+# Machine-generated file - use "minicom -s" to change parameters.
+pu mfcolor            BLACK
+pu mbcolor            BLUE
+pu tfcolor            WHITE
+pu tbcolor            BLACK
+pu sfcolor            BLACK
+pu sbcolor            RED
