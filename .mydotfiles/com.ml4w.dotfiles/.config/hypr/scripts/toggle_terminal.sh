@@ -4,7 +4,7 @@
 current_workspace=$(hyprctl activewindow -j | jq '.workspace.id')
 
 if [ "$current_workspace" == "4" ]; then
-  hyprctl dispatch workspace 3
+  hyprctl dispatch 'hl.dsp.focus({workspace=3})'
 else
-  hyprctl dispatch workspace 4
+  hyprctl dispatch 'hl.dsp.focus({workspace=4})'
 fi
