@@ -302,7 +302,8 @@ window#waybar.empty #window {
  * Custom Notification
  * ----------------------------------------------------- */
 
- #custom-notification {
+ #custom-notification,
+ #custom-notification * {
     margin: 0px 11px 0px 0px;
     padding: 0px;
     font-size: 24px;
