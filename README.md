@@ -60,4 +60,7 @@ git clone https://github.com/junegunn/fzf-git.sh.git ~/.config/fzf-git.sh
 
 # Ensure the hostname command is available; used for loading custom-<hostname>.lua
 paru -S inetutils
+
+# Fix waybar "notifications_active" instead of bell icon (font missing)
+paru -S ttf-material-icons-git
 ```
