@@ -1,0 +1,2 @@
+#!/bin/sh
+exec electron44 ~/.local/share/drata-agent/app.asar "$@"

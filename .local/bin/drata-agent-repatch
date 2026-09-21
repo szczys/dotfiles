@@ -1,0 +1,81 @@
+#!/bin/sh
+# Re-apply the drata-agent blur-hide patch after a package upgrade.
+#
+# Re-extracts from /usr/lib/drata-agent/app.asar (the pacman-managed copy),
+# patches the blur->hide handler to a no-op, repacks to a user-local asar,
+# and restarts drata-agent so the patched version is loaded.
+#
+# Safe to re-run: aborts cleanly if the target string is not found
+# (already patched, or upstream changed the surrounding code).
+
+set -e
+
+# Hardcode HOME so the script works when invoked by a root pacman hook.
+HOME=/home/mike
+USER=mike
+
+SRC_ASAR=/usr/lib/drata-agent/app.asar
+WORKDIR="$HOME/.local/share/drata-agent"
+SRC_DIR="$WORKDIR/src"
+OUT_ASAR="$WORKDIR/app.asar"
+WRAPPER="$HOME/.local/bin/drata-agent"
+LOGFILE=/tmp/drata-repatch.log
+
+OLD='this.window.on("blur",()=>{this.hideWindow()})'
+NEW='this.window.on("blur",()=>{})'
+
+if [ ! -f "$SRC_ASAR" ]; then
+    echo "ERROR: $SRC_ASAR not found. Is drata-agent installed?" >&2
+    exit 1
+fi
+
+if ! command -v asar >/dev/null 2>&1; then
+    echo "ERROR: 'asar' command not found. Install the 'asar' package." >&2
+    exit 1
+fi
+
+echo "==> Re-extracting from $SRC_ASAR"
+rm -rf "$SRC_DIR"
+mkdir -p "$SRC_DIR"
+asar extract "$SRC_ASAR" "$SRC_DIR"
+
+echo "==> Patching dist/main.js"
+COUNT=$(grep -c "$OLD" "$SRC_DIR/dist/main.js" || true)
+if [ "$COUNT" -eq 0 ]; then
+    echo "WARNING: target string not found in upstream asar." >&2
+    echo "         Either already patched, or upstream changed the code." >&2
+    echo "         Inspect $SRC_DIR/dist/main.js and update this script." >&2
+    exit 1
+fi
+
+sed -i "s|this\.window\.on(\"blur\",()=>{this\.hideWindow()})|this.window.on(\"blur\",()=>{})|" "$SRC_DIR/dist/main.js"
+
+echo "==> Verifying patch"
+if [ "$(grep -c "$NEW" "$SRC_DIR/dist/main.js")" -lt 1 ]; then
+    echo "ERROR: patched line not present after sed. Aborting." >&2
+    exit 1
+fi
+if [ "$(grep -c "$OLD" "$SRC_DIR/dist/main.js")" -ne 0 ]; then
+    echo "ERROR: original line still present after sed. Aborting." >&2
+    exit 1
+fi
+
+echo "==> Repacking to $OUT_ASAR"
+asar pack "$SRC_DIR" "$OUT_ASAR"
+
+echo "==> Restarting drata-agent"
+# Match electron processes running drata's app.asar, but not this script
+# (whose cmdline contains "drata-agent-repatch"). Using a pattern that only
+# matches the actual electron process avoids killing our own shell.
+pkill -f "electron.*\.local/share/drata-agent/app.asar" 2>/dev/null || true
+pkill -f "electron /usr/lib/drata-agent/app.asar" 2>/dev/null || true
+sleep 1
+if [ -x "$WRAPPER" ]; then
+    setsid "$WRAPPER" >"$LOGFILE" 2>&1 < /dev/null &
+    disown
+else
+    echo "WARNING: wrapper $WRAPPER not found or not executable." >&2
+    echo "         Patched asar is in place; restart drata manually." >&2
+fi
+
+echo "==> Done. Drata Agent restarted with patched asar."
