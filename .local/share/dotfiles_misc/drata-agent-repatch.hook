@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = drata-agent
+
+[Action]
+Description = Re-patching drata-agent asar (blur-hide workaround)
+When = PostTransaction
+Depends = asar
+Exec = /usr/bin/sudo -u mike /home/mike/.local/bin/drata-agent-repatch

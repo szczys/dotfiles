@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Drata Agent
+Exec=/home/mike/.local/bin/drata-agent %U
+Terminal=false
+Type=Application
+Icon=drata-agent
+StartupWMClass=Drata Agent
+Comment=Patched Drata Agent (blur-hide disabled)
+MimeType=x-scheme-handler/auth-drata-agent;
+Categories=Office;
