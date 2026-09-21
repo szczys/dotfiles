@@ -1,0 +1,21 @@
+[Unit]
+Description=ClamAV Daily System Scan
+After=network.target clamav-freshclam.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/clamscan --infected --recursive --exclude-dir=/sys --exclude-dir=/proc --exclude-dir=/dev /
+ExecStopPost=/usr/bin/bash -c '\
+  USER_NAME="mike"; \
+  USER_ID=$$(id -u "$$USER_NAME"); \
+  DBUS_ADDRESS="unix:path=/run/user/$$USER_ID/bus"; \
+  \
+  if [ "$$EXIT_STATUS" -eq 0 ]; then \
+    TITLE="ClamAV Scan Complete"; MSG="System scan finished. No threats detected."; URGENCY="low"; \
+  elif [ "$$EXIT_STATUS" -eq 1 ]; then \
+    TITLE="ClamAV Alert"; MSG="Threat detected! Check journalctl -u clamscan"; URGENCY="critical"; \
+  else \
+    TITLE="ClamAV Error"; MSG="Scan finished with errors (code $$EXIT_STATUS). Check logs."; URGENCY="normal"; \
+  fi; \
+  \
+  sudo -u "$$USER_NAME" DBUS_SESSION_BUS_ADDRESS="$$DBUS_ADDRESS" notify-send -u "$$URGENCY" "$$TITLE" "$$MSG" || true'
