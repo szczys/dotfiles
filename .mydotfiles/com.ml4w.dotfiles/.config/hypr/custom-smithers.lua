@@ -31,3 +31,25 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("nm-applet")
     hl.exec_cmd("sh -c 'sleep 3 && exec drata-agent'")
 end)
+
+-- Force a real DPMS off->on cycle; setDPMS(true) is a no-op if Hyprland already thinks the output is on.
+-- Note: hl.dsp.dpms only honors a table's `action` field; anything else ("on", {enable=true}) toggles.
+local function kick_dpms(name)
+    hl.dispatch(hl.dsp.dpms({ action = "off", monitor = name }))
+    hl.timer(function()
+        hl.dispatch(hl.dsp.dpms({ action = "on", monitor = name }))
+    end, { timeout = 1000, type = "oneshot" })
+end
+
+-- MST externals re-enumerate (DP-8 -> DP-10 -> DP-12...) after resume / dock replug
+hl.on("monitor.added", function(mon)
+    if mon.name:match("^DP%-") then
+        hl.timer(function() kick_dpms(mon.name) end, { timeout = 1500, type = "oneshot" })
+    end
+end)
+
+-- Manual recovery that works under hyprlock (use the laptop keyboard)
+hl.bind("SUPER + CTRL + ALT + W", function()
+    hl.dispatch(hl.dsp.dpms({ action = "off" }))
+    hl.timer(function() hl.dispatch(hl.dsp.dpms({ action = "on" })) end, { timeout = 1000, type = "oneshot" })
+end, { locked = true, description = "Force-wake displays" })
