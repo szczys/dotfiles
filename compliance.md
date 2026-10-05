@@ -62,17 +62,24 @@ This repository includes systemd units (`auto-update.service` and `auto-update.t
 This directory contains systemd service and timer files to automate daily ClamAV malware scans and display desktop notifications upon completion.
 
 ### Files
-* `clamscan.service` - Executes the system scan and triggers a desktop notification based on the exit status.
+* `clamscan.service` - Executes the system scan via `clamdscan --multiscan` (parallel scanning through the `clamd` daemon) and triggers a desktop notification based on the exit status.
 * `clamscan.timer` - Schedules the scan to run automatically once per day.
+* `clamd.conf` - `clamd` daemon config, installed to `/etc/clamav/clamd.conf`. Sets `MaxThreads` for the parallel scan and excludes the `/proc`, `/sys` and `/dev` pseudo-filesystems (`clamdscan` takes exclusions from here rather than from command-line flags). Also moves `clamd`'s scratch files to a private `/var/lib/clamav/tmp` (writable only by `clamav`) and excludes that directory, and excludes the per-user FUSE mounts `/run/user/<uid>/gvfs` and `/run/user/<uid>/doc`, which FUSE makes unreadable to every user but the owner (portal files are scanned at their real paths).
+* `clamav-daemon.service.d/read-all-files.conf` - systemd drop-in that starts `clamd` as the `clamav` user with `CAP_DAC_READ_SEARCH`, so it can read every file for the full-system scan without running as root (read-only; it grants no write access). It also creates `clamd`'s private temp directory `/var/lib/clamav/tmp` (owner `clamav`, mode 0700) on every daemon start.
 
 ### Installation
 
-Copy the unit files from `~/.local/share/dotfiles_misc/` into the systemd system directory, reload, and enable the service:
+Copy the `clamd` config into `/etc/clamav/`, the `clamd` drop-in and unit files into the systemd system directory, remove any stale root-owned `clamd` pid file, then reload, restart the daemon so it picks up the config, and enable the timer:
 
 ```bash
+sudo cp ~/.local/share/dotfiles_misc/clamd.conf /etc/clamav/clamd.conf
+sudo install -D -m 644 ~/.local/share/dotfiles_misc/clamav-daemon.service.d/read-all-files.conf /etc/systemd/system/clamav-daemon.service.d/read-all-files.conf
+sudo rm -f /run/clamav/clamd.pid
 sudo cp ~/.local/share/dotfiles_misc/clamscan.service /etc/systemd/system/
 sudo cp ~/.local/share/dotfiles_misc/clamscan.timer /etc/systemd/system/
 sudo systemctl daemon-reload
+sudo systemctl enable clamav-daemon.service
+sudo systemctl restart clamav-daemon.service
 sudo systemctl enable --now clamscan.timer
 ```
 

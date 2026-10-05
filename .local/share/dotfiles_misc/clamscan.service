@@ -1,10 +1,13 @@
 [Unit]
 Description=ClamAV Daily System Scan
-After=network.target clamav-freshclam.service
+After=network.target clamav-freshclam.service clamav-daemon.service
+Wants=clamav-daemon.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/clamscan --infected --recursive --exclude-dir=/sys --exclude-dir=/proc --exclude-dir=/dev /
+Nice=19
+IOSchedulingClass=idle
+ExecStart=/usr/bin/clamdscan --multiscan --infected /
 ExecStopPost=/usr/bin/bash -c '\
   USER_NAME="mike"; \
   USER_ID=$$(id -u "$$USER_NAME"); \
