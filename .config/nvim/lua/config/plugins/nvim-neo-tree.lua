@@ -9,6 +9,11 @@ return {
   lazy = false,
 
   config = function ()
+    require("neo-tree").setup({
+      filesystem = {
+        use_libuv_file_watcher = true, -- refresh on external disk changes
+      },
+    })
     vim.keymap.set("n", "<leader>ee", "<cmd>Neotree toggle<CR>", {desc = "Toggle file explorer"}) -- toggle file explorer
   end,
 }
