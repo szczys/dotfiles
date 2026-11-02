@@ -1,21 +1,30 @@
+import Quickshell
 import Quickshell.Hyprland
-import Quickshell.Io
 import QtQuick
 import qs.CustomTheme
 
-// Title of the focused window, the equivalent of waybar's hyprland/window
-// module. Collapses out of the layout entirely while nothing is focused
-// (empty desktop) and elides titles longer than maxWidth, optionally running
-// them through rewrite rules first.
+// Title of the window on *this bar's monitor*, the per-monitor equivalent of
+// waybar's hyprland/window module. One bar runs per screen (see shell.qml), and
+// each shows the window that has focus on its own monitor's active workspace:
 //
-// Active-window tracking: Hyprland.activeToplevel is only maintained from
-// activewindowv2 events, which Hyprland sends on focus *changes* — after a
-// shell (re)load it is null until the next focus switch. The seed below fills
-// that gap with a single hyprctl query at startup, and is dropped the moment
-// the first focus event arrives (or the seeded window closes), so a stale
-// title can neither linger nor resurface when activeToplevel later goes null.
+//  - On the focused monitor that is Hyprland.activeToplevel (live).
+//  - On every other monitor it is the workspace's last-focused window, as
+//    reported by Hyprland in `hyprctl workspaces -j` ("lastwindow"), resolved
+//    to its live toplevel so title changes still show up.
+//
+// Collapses out of the layout entirely while the workspace is empty and elides
+// titles longer than maxWidth, optionally running them through rewrite rules
+// first.
+//
+// Hyprland.activeToplevel is only maintained from activewindowv2 events, so it
+// is null after a shell (re)load until the next focus switch. The workspace
+// "lastwindow" path covers that gap too: after the initial refresh below, the
+// focused monitor's last window is the focused window.
 Item {
     id: windowRoot
+
+    // The screen this bar is on. Set by StatusbarWindow.
+    property ShellScreen screen: null
 
     // Width cap in pixels; longer titles are elided with an ellipsis.
     property int maxWidth: 400
@@ -24,17 +33,12 @@ Item {
     // is shown, e.g. { "(.*) - Brave": "$1" } to strip the browser suffix.
     property var rewriteRules: ({})
 
-    // --- Active window tracking ------------------------------------------
+    // --- Per-monitor window tracking -------------------------------------
 
-    property string seededAddress: ""
-    property string seededTitle: ""
-
-    readonly property string rawTitle: {
-        let active = Hyprland.activeToplevel
-        if (active)
-            return active.title
-        return windowRoot.seededAddress !== "" ? windowRoot.seededTitle : ""
-    }
+    readonly property HyprlandMonitor monitor:
+        windowRoot.screen ? Hyprland.monitorFor(windowRoot.screen) : null
+    readonly property HyprlandWorkspace workspace:
+        windowRoot.monitor ? windowRoot.monitor.activeWorkspace : null
 
     // Hyprland addresses are hexadecimal and may or may not carry an 0x
     // prefix depending on where they came from (hyprctl json vs. socket
@@ -43,45 +47,59 @@ Item {
         return address.startsWith("0x") ? address.slice(2) : address
     }
 
-    Process {
-        id: seedProc
-        command: ["hyprctl", "activewindow", "-j"]
-        running: false
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    let obj = JSON.parse(this.text.trim())
-                    if (obj && obj.address && obj.title) {
-                        windowRoot.seededAddress = obj.address
-                        windowRoot.seededTitle = obj.title
-                    }
-                } catch (e) {
-                    // No window focused (hyprctl returns "Invalid" or empty):
-                    // nothing to seed.
-                }
-            }
+    readonly property string rawTitle: {
+        let ws = windowRoot.workspace
+        if (!ws)
+            return ""
+
+        // Focused window, if it lives on this monitor's workspace.
+        let active = Hyprland.activeToplevel
+        if (active && active.workspace === ws)
+            return active.title
+
+        // Otherwise the workspace's last-focused window.
+        let ipc = ws.lastIpcObject
+        let last = (ipc && ipc.lastwindow) ? windowRoot.addressKey(ipc.lastwindow) : ""
+        if (last === "" || last === "0")
+            return ""
+        let tls = ws.toplevels.values
+        for (let i = 0; i < tls.length; i++) {
+            if (windowRoot.addressKey(tls[i].address) === last)
+                return tls[i].title
+        }
+        // Not resolved to a live toplevel yet (e.g. right after startup):
+        // fall back to the title Hyprland reported with the workspace.
+        return ipc.lastwindowtitle || ""
+    }
+
+    // lastIpcObject is only refreshed on request, so re-query workspaces
+    // whenever the per-workspace last window can have changed. Coalesced so a
+    // burst of events costs a single hyprctl round trip.
+    Timer {
+        id: refreshTimer
+        interval: 50
+        onTriggered: {
+            Hyprland.refreshWorkspaces()
+            Hyprland.refreshToplevels()
         }
     }
 
-    Component.onCompleted: seedProc.running = true
+    Component.onCompleted: refreshTimer.start()
 
     Connections {
         target: Hyprland
 
         function onRawEvent(event): void {
-            if (event.name === "activewindowv2") {
-                // First focus change since (re)load: activeToplevel is
-                // updated before rawEvent is emitted, so it takes over from
-                // here and the seed must never resurface.
-                windowRoot.seededAddress = ""
-                windowRoot.seededTitle = ""
-            } else if (event.name === "closewindow"
-                && windowRoot.addressKey(event.data)
-                    === windowRoot.addressKey(windowRoot.seededAddress)) {
-                // The seeded window closed without a focus change between
-                // seeding and now: drop it rather than showing a stale title.
-                windowRoot.seededAddress = ""
-                windowRoot.seededTitle = ""
+            switch (event.name) {
+            case "activewindowv2":
+            case "openwindow":
+            case "closewindow":
+            case "movewindowv2":
+            case "workspacev2":
+            case "focusedmonv2":
+            case "moveworkspacev2":
+                refreshTimer.restart()
+                break
             }
         }
     }
