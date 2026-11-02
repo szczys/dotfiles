@@ -45,6 +45,10 @@ change. The statusbar writes enabled / alwaysExpanded / autohide back into it.
         "dateFormat": "ddd, dd MMM",
         "calendarCommand": ""
     },
+    "window": {
+        "maxWidth": 400,
+        "rewrite": {}
+    },
     "volume": {
         "settingsCommand": "pavucontrol"
     },

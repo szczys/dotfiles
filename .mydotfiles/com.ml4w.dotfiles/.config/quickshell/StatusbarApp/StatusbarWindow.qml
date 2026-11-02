@@ -84,6 +84,7 @@ PanelWindow {
         "border": { "width": 2, "colorTop": "", "colorBottom": "" },
         "opacity":{ "collapsed": 0.6, "expanded": 0.8 },
         "clock":  { "format": "HH:mm", "dateFormat": "ddd, dd MMM", "calendarCommand": "" },
+        "window": { "maxWidth": 400, "rewrite": {} },
         "volume": { "settingsCommand": "pavucontrol" },
         "workspaces": { "count": 5 },
         "systemtray": { "chip": true }
@@ -357,6 +358,13 @@ PanelWindow {
         }
     }
     Component { id: cLauncher;   LauncherModule {} }
+    Component {
+        id: cWindow
+        WindowModule {
+            maxWidth: root.settings.window.maxWidth
+            rewriteRules: root.settings.window.rewrite
+        }
+    }
     // Whether the calendar panel is showing. The panel is an information layer
     // of the clock module, drawn inside this window (see CalendarPanel.qml), so
     // the bar carries it rather than depending on a separate calendar window.
@@ -513,6 +521,7 @@ PanelWindow {
         "terminal":   cTerminal,
         "workspaces": cWorkspaces,
         "launcher":   cLauncher,
+        "window":     cWindow,
         "clock":      cClock,
         "swaync":     cSwaync,
         "systemtray": cSystemTray,
@@ -976,6 +985,9 @@ PanelWindow {
                 Loader {
                     Layout.alignment: Qt.AlignVCenter
                     sourceComponent: root.moduleComponents[modelData] || null
+                    // Collapse the layout slot when the module marks itself
+                    // collapsed, mirroring the right area.
+                    visible: (item && item.collapsed !== undefined) ? !item.collapsed : true
                     onLoaded: Qt.callLater(root.rebuildNavItems)
                 }
             }
@@ -995,6 +1007,10 @@ PanelWindow {
                 Loader {
                     Layout.alignment: Qt.AlignVCenter
                     sourceComponent: root.moduleComponents[modelData] || null
+                    // Collapse the layout slot when the module marks itself
+                    // collapsed (e.g. the window title when nothing is
+                    // focused), mirroring the right area.
+                    visible: (item && item.collapsed !== undefined) ? !item.collapsed : true
                     onLoaded: Qt.callLater(root.rebuildNavItems)
                 }
             }
