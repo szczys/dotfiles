@@ -10,8 +10,17 @@
     },
     "modules": {
         "left": ["terminal", "workspaces"],
-        "center": ["launcher", "swaync"],
+        "center": ["window", "launcher", "swaync"],
         "right": ["updates", "battery", "powerprofile", "volume", "systemtray", "logo", "power", "clock"]
+    },
+    "window": {
+        "rewrite": {
+            "(.*) - Brave": "$1",
+            "(.*) - Chromium": "$1",
+            "(.*) - Brave Search": "$1",
+            "(.*) - Outlook": "$1",
+            "(.*) Microsoft Teams": "$1"
+        }
     },
     "clock": {
         "format": "hh:mm AP"
