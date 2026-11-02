@@ -32,6 +32,14 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("sh -c 'sleep 3 && exec drata-agent'")
 end)
 
+-- 0.57.0 enabled this by default (PR #15803); its format-table resets after
+-- MST/dock re-enumeration on resume kill Wayland clients. See hyprwm/Hyprland#16716.
+hl.config({
+    quirks = {
+        skip_non_kms_dmabuf_formats = false,
+    },
+})
+
 -- Force a real DPMS off->on cycle; setDPMS(true) is a no-op if Hyprland already thinks the output is on.
 -- Note: hl.dsp.dpms only honors a table's `action` field; anything else ("on", {enable=true}) toggles.
 local function kick_dpms(name)
