@@ -63,4 +63,8 @@ paru -S inetutils
 
 # Fix waybar "notifications_active" instead of bell icon (font missing)
 paru -S ttf-material-icons-git
+
+# Install ML4W Power Menu (slides in from the screen edge; ML4W autostart starts
+# it and the statusbar power button / SUPER+CTRL+P toggle it)
+curl -sSL https://raw.githubusercontent.com/mylinuxforwork/ml4w-powermenu/main/install.sh | bash
 ```

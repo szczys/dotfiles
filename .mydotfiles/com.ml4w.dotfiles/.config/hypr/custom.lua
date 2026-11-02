@@ -46,6 +46,10 @@ hl.bind("F12", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_terminal.sh"), { d
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("grimblast copy area"), { description = "Screenshot area to clipboard" })
 hl.bind("PRINT", hl.dsp.exec_cmd("grimblast save screen"), { description = "Screenshot active screen" })
 
+-- ML4W Power Menu carries its own slide animation; keep Hyprland's layer
+-- animation from playing on top of it (see ml4w-powermenu README).
+hl.layer_rule({ match = { namespace = "ml4w-powermenu" }, no_anim = true })
+
 -- Load host-specific configuration
 local hostname = io.popen("hostname"):read("*a"):gsub("%s+", "")
 local host_file = "custom-" .. hostname
