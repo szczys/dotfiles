@@ -855,15 +855,15 @@ PanelWindow {
             ? root.settings.pill.collapsedWidth
             : centerArea.implicitWidth + 32
 
-        // Minimum width the content needs so the centered center area never
-        // overlaps the left/right areas. The center stays centered, so each
-        // side must clear half of it: the bar has to be at least as wide as the
-        // center plus twice the wider of the two side areas (whichever side
-        // would collide first), plus the 16px edge margins and some breathing
-        // room. Computed live so adding workspaces (or any module growing)
-        // pushes the bar wider instead of clipping.
+        // Width the content needs: the center area plus both side areas, the
+        // 16px edge margins and a little breathing room. The pill hugs its
+        // content, and the center module is centered in the space between the
+        // two side areas (see centerArea below) — so the gaps around it stay
+        // balanced no matter how lopsided the sides are. Computed live so
+        // adding workspaces (or any module growing) pushes the bar wider
+        // instead of clipping.
         property real contentWidth: centerArea.implicitWidth
-            + 2 * Math.max(leftArea.implicitWidth, rightArea.implicitWidth)
+            + leftArea.implicitWidth + rightArea.implicitWidth
             + 64
         // expandedWidth from the settings file is treated as a minimum: the
         // pill grows past it when the content needs more room.
@@ -998,7 +998,14 @@ PanelWindow {
         // ==========================================
         RowLayout {
             id: centerArea
-            anchors.centerIn: parent
+            // Centered in the space between the left and right module areas,
+            // not on the pill's own middle: the two sides are rarely the same
+            // width, and pill-centering leaves the center content hugging the
+            // fuller side (with a large right group the title reads as right
+            // justified, with a big void before the left group).
+            anchors.verticalCenter: parent.verticalCenter
+            x: Math.round((16 + leftArea.implicitWidth
+                + (pill.width - 16 - rightArea.implicitWidth) - width) / 2)
             spacing: 14
 
             Repeater {
