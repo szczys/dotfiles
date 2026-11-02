@@ -1,0 +1,19 @@
+{
+    /* Hand-edited statusbar configuration. These values are merged over the
+       built-in defaults, which are documented in
+       ~/.config/quickshell/StatusbarApp/config.json.
+       Reload after editing: qs ipc call statusbar reload */
+    "bar": {
+        "enabled": true,
+        "alwaysExpanded": true,
+        "position": "bottom"
+    },
+    "modules": {
+        "left": ["terminal", "workspaces"],
+        "center": ["launcher", "swaync"],
+        "right": ["updates", "battery", "powerprofile", "volume", "systemtray", "logo", "power", "clock"]
+    },
+    "clock": {
+        "format": "hh:mm AP"
+    }
+}
