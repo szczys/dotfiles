@@ -41,7 +41,7 @@ hl.bind("SUPER + J", hl.dsp.focus({ direction = "up" }), { description = "Move f
 hl.bind("SUPER + K", hl.dsp.focus({ direction = "down" }), { description = "Move focus down" })
 hl.bind("SUPER + S", hl.dsp.layout("swapsplit"), { description = "Swapsplit" })
 hl.bind("SUPER + D", hl.dsp.exec_cmd("pkill rofi || rofi -show drun -replace -i"), { description = "Open application launcher" })
-hl.bind("XF86PowerOff", hl.dsp.exec_cmd("hyprlock"), { description = "Lock screen on power button" })
+hl.bind("XF86PowerOff", hl.dsp.exec_cmd("$HOME/.local/bin/hyprlock"), { description = "Lock screen on power button" })
 hl.bind("F12", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_terminal.sh"), { description = "Toggle terminal workspace" })
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("grimblast copy area"), { description = "Screenshot area to clipboard" })
 hl.bind("PRINT", hl.dsp.exec_cmd("grimblast save screen"), { description = "Screenshot active screen" })
