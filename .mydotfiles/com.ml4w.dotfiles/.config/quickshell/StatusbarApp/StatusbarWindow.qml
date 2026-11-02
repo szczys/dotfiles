@@ -118,6 +118,10 @@ PanelWindow {
         path: Quickshell.env("HOME") + "/.config/ml4w-statusbar/config.json"
         blockLoading: true
         printErrors: false
+        // With one bar per screen, a switch flipped through one bar's IPC
+        // writes this file; the watch makes every other bar pick it up.
+        watchChanges: true
+        onFileChanged: reload()
         // `ready` is set last, after the values are in place: it releases the
         // gate below, and a binding fires the moment it is assigned.
         onLoaded: { root.applySettings(); root.ready = true }
@@ -361,6 +365,7 @@ PanelWindow {
     Component {
         id: cWindow
         WindowModule {
+            screen: root.screen
             maxWidth: root.settings.window.maxWidth
             rewriteRules: root.settings.window.rewrite
         }
@@ -644,7 +649,17 @@ PanelWindow {
     // function names it had when the calendar was its own window, so the
     // existing callers keep working: the SUPER + CTRL + C keybinding, the
     // waybar clock's on-click and the ml4w-calendar shell alias.
+    // One bar runs per screen (shell.qml), but an IPC target can only have one
+    // live handler. Only the bar on the focused monitor answers, so the
+    // keybindings (SUPER + SPACE, SUPER + CTRL + C) act on the monitor you're
+    // on. Settings changes it persists reach the other bars via the
+    // settingsFile watch.
+    readonly property bool onFocusedMonitor:
+        !!root.screen && !!Hyprland.focusedMonitor
+        && Hyprland.focusedMonitor.name === root.screen.name
+
     IpcHandler {
+        enabled: root.onFocusedMonitor
         target: "calendar"
         function toggle(): void { root.calendarOpen = !root.calendarOpen }
         function open(): void { root.calendarOpen = true }
@@ -653,6 +668,7 @@ PanelWindow {
     }
 
     IpcHandler {
+        enabled: root.onFocusedMonitor
         target: "statusbar"
         function toggle(): void { root.setEnabled(!root.settings.bar.enabled) }
         // Named enable/disable rather than show/hide: "show" is a reserved
