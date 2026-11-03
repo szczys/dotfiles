@@ -8,6 +8,14 @@
         "alwaysExpanded": true,
         "position": "bottom"
     },
+    "pill": {
+        "fullWidth": true,
+        "fullWidthMargin": 16
+    },
+    "opacity": {
+        "collapsed": 0.3,
+        "expanded": 0.3
+    },
     "modules": {
         "left": ["terminal", "workspaces"],
         "center": ["window"],

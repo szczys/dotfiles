@@ -77,12 +77,12 @@ PanelWindow {
         "bar":    { "height": 40, "reservedHeight": 72, "enabled": true,
                     "alwaysExpanded": true, "autohide": false, "hideDelay": 400,
                     "position": "top" },
-        "pill":   { "collapsedWidth": 0, "expandedWidth": 680, "radius": 12, "animationDuration": 350 },
+        "pill":   { "collapsedWidth": 0, "expandedWidth": 680, "fullWidth": false, "fullWidthMargin": 0, "radius": 12, "animationDuration": 350 },
         "modules":{ "left": ["terminal", "workspaces"],
                     "center": ["launcher", "clock", "swaync"],
                     "right": ["updates", "battery", "powerprofile", "volume", "systemtray", "logo", "power"] },
         "border": { "width": 2, "colorTop": "", "colorBottom": "" },
-        "opacity":{ "collapsed": 0.6, "expanded": 0.8 },
+        "opacity":{ "collapsed": 0.6, "expanded": 0.8, "background": 1.0 },
         "clock":  { "format": "HH:mm", "dateFormat": "ddd, dd MMM", "calendarCommand": "" },
         "window": { "maxWidth": 400, "rewrite": {} },
         "volume": { "settingsCommand": "pavucontrol" },
@@ -882,9 +882,14 @@ PanelWindow {
             + leftArea.implicitWidth + rightArea.implicitWidth
             + 64
         // expandedWidth from the settings file is treated as a minimum: the
-        // pill grows past it when the content needs more room.
-        property real expandedWidth: Math.max(
-            root.settings.pill.expandedWidth, contentWidth)
+        // pill grows past it when the content needs more room. With
+        // pill.fullWidth the expanded pill spans the whole screen instead
+        // (the window itself is anchored edge to edge), less
+        // pill.fullWidthMargin on each side — set it to Hyprland's
+        // general:gaps_out to line the pill up with tiled windows' borders.
+        property real expandedWidth: root.settings.pill.fullWidth
+            ? root.width - 2 * root.settings.pill.fullWidthMargin
+            : Math.max(root.settings.pill.expandedWidth, contentWidth)
 
         width: expanded ? expandedWidth : collapsedWidth
         height: expanded ? root.barHeight + 10 : root.barHeight
@@ -928,18 +933,30 @@ PanelWindow {
             }
         }
 
+        // The shadow is a filled shape, so it fades with the background:
+        // otherwise a see-through bar would show it as a dark band inside the
+        // border.
         RectangularShadow {
             anchors.fill: pillBg
             radius: pillBg.radius
             blur: 15
             color: Qt.rgba(Theme.shadow.r, Theme.shadow.g, Theme.shadow.b, 0.4)
+            opacity: pillBg.opacity * root.settings.opacity.background
         }
 
-        // Gradient BORDER layer (outer)
-        Rectangle {
+        // Pill background: a gradient border ring plus an inner fill. The two
+        // are separate so the fill can be made translucent or fully
+        // transparent ("opacity.background") while the border stays.
+        // "opacity.expanded"/"collapsed" still fade the whole thing.
+        Item {
             id: pillBg
             anchors.fill: parent
-            radius: root.settings.pill.radius
+            readonly property real radius: root.settings.pill.radius
+            readonly property real borderWidth: root.settings.border.width
+
+            // Composite ring + fill as one layer before applying opacity, so
+            // the overall fade doesn't let the pieces show through each other.
+            layer.enabled: true
             opacity: pill.expanded
                 ? root.settings.opacity.expanded
                 : root.settings.opacity.collapsed
@@ -950,30 +967,61 @@ PanelWindow {
                 }
             }
 
-            // Border colors come from the settings file; empty strings fall
-            // back to the dynamic wallpaper theme.
-            gradient: Gradient {
-                orientation: Gradient.Vertical
-                GradientStop {
-                    position: 0.0
-                    color: root.settings.border.colorTop !== ""
-                        ? root.settings.border.colorTop
-                        : Theme.primary
-                }
-                GradientStop {
-                    position: 1.0
-                    color: root.settings.border.colorBottom !== ""
-                        ? root.settings.border.colorBottom
-                        : Theme.on_primary
-                }
-            }
-
             // Actual background fill (inner), inset by the border thickness
             Rectangle {
                 anchors.fill: parent
-                anchors.margins: root.settings.border.width
-                radius: parent.radius - anchors.margins
+                anchors.margins: pillBg.borderWidth
+                radius: Math.max(0, pillBg.radius - pillBg.borderWidth)
                 color: Theme.background
+                opacity: root.settings.opacity.background
+            }
+
+            // Gradient BORDER ring: a gradient-filled shape with the inner
+            // area masked out. Border colors come from the settings file;
+            // empty strings fall back to the dynamic wallpaper theme.
+            Rectangle {
+                anchors.fill: parent
+                radius: pillBg.radius
+                gradient: Gradient {
+                    orientation: Gradient.Vertical
+                    GradientStop {
+                        position: 0.0
+                        color: root.settings.border.colorTop !== ""
+                            ? root.settings.border.colorTop
+                            : Theme.primary
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: root.settings.border.colorBottom !== ""
+                            ? root.settings.border.colorBottom
+                            : Theme.on_primary
+                    }
+                }
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    maskEnabled: true
+                    maskInverted: true
+                    maskSource: ringMask
+                    // Soft threshold keeps the inner rounded corners
+                    // antialiased.
+                    maskThresholdMin: 0.5
+                    maskSpreadAtMin: 1.0
+                }
+            }
+
+            // Mask for the ring: the inner area to cut out. Rendered only
+            // into its layer texture, never on screen.
+            Item {
+                id: ringMask
+                anchors.fill: parent
+                layer.enabled: true
+                visible: false
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.margins: pillBg.borderWidth
+                    radius: Math.max(0, pillBg.radius - pillBg.borderWidth)
+                    color: "black"
+                }
             }
         }
 
