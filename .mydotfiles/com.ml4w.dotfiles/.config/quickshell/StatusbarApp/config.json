@@ -23,6 +23,8 @@ change. The statusbar writes enabled / alwaysExpanded / autohide back into it.
     "pill": {
         "collapsedWidth": 0,
         "expandedWidth": 680,
+        "fullWidth": false,
+        "fullWidthMargin": 0,
         "radius": 12,
         "animationDuration": 350
     },
@@ -38,7 +40,8 @@ change. The statusbar writes enabled / alwaysExpanded / autohide back into it.
     },
     "opacity": {
         "collapsed": 0.6,
-        "expanded": 0.8
+        "expanded": 0.8,
+        "background": 1.0
     },
     "clock": {
         "format": "HH:mm",
