@@ -42,17 +42,22 @@ hl.config({
 
 -- Force a real DPMS off->on cycle; setDPMS(true) is a no-op if Hyprland already thinks the output is on.
 -- Note: hl.dsp.dpms only honors a table's `action` field; anything else ("on", {enable=true}) toggles.
+-- Delays trimmed from 1500/1000 ms to cut wake time; if the externals come up
+-- black again after resume, raise KICK_DELAY_MS first (SUPER+CTRL+ALT+W recovers).
+local KICK_DELAY_MS = 500   -- after monitor.added, let the initial modeset finish
+local KICK_OFF_MS = 250     -- how long the output stays off during the kick
+
 local function kick_dpms(name)
     hl.dispatch(hl.dsp.dpms({ action = "off", monitor = name }))
     hl.timer(function()
         hl.dispatch(hl.dsp.dpms({ action = "on", monitor = name }))
-    end, { timeout = 1000, type = "oneshot" })
+    end, { timeout = KICK_OFF_MS, type = "oneshot" })
 end
 
 -- MST externals re-enumerate (DP-8 -> DP-10 -> DP-12...) after resume / dock replug
 hl.on("monitor.added", function(mon)
     if mon.name:match("^DP%-") then
-        hl.timer(function() kick_dpms(mon.name) end, { timeout = 1500, type = "oneshot" })
+        hl.timer(function() kick_dpms(mon.name) end, { timeout = KICK_DELAY_MS, type = "oneshot" })
     end
 end)
 
