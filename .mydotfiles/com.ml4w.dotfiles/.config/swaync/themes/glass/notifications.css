@@ -36,7 +36,7 @@
     opacity:1.0;
     margin:10px;
     margin-right:18px;
-    box-shadow: 1 1 5 1px @shadow;
+    box-shadow: 1px 1px 5px 1px @shadow;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
@@ -47,7 +47,7 @@
     opacity:1.0;
     margin:10px;
     margin-right:18px;
-    box-shadow: 1 1 5 1px @shadow;
+    box-shadow: 1px 1px 5px 1px @shadow;
 }
 
 /*This is the margin for the floating notifications on desktop only!*/
