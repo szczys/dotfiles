@@ -54,8 +54,16 @@ local function kick_dpms(name)
     end, { timeout = KICK_OFF_MS, type = "oneshot" })
 end
 
+-- Skip the kick during session startup: the monitors are already lit (SDDM drives
+-- all three fine), and at login the off half lands but the on half never does,
+-- leaving one external dark (seen 2026-11-07 after adding Plymouth). Note this also
+-- suppresses the kick for KICK_GRACE_S after any config reload.
+local KICK_GRACE_S = 15
+local config_loaded_at = os.time()
+
 -- MST externals re-enumerate (DP-8 -> DP-10 -> DP-12...) after resume / dock replug
 hl.on("monitor.added", function(mon)
+    if os.time() - config_loaded_at < KICK_GRACE_S then return end
     if mon.name:match("^DP%-") then
         hl.timer(function() kick_dpms(mon.name) end, { timeout = KICK_DELAY_MS, type = "oneshot" })
     end
