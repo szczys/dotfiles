@@ -146,7 +146,7 @@ Item {
 
     // --- CALENDAR LOGIC & DATA ---
     property var monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    property var dayNames: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    property var dayNames: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
     property int currentMonth: new Date().getMonth()
     property int currentYear: new Date().getFullYear()
@@ -185,14 +185,15 @@ Item {
         weekModel.clear()
 
         let firstDay = new Date(year, month, 1)
-        let startingDayOfWeek = firstDay.getDay()
-        let startCell = startingDayOfWeek === 0 ? 6 : startingDayOfWeek - 1
+        // Weeks start on Sunday: getDay() is already 0 = Sunday
+        let startCell = firstDay.getDay()
 
         let daysInMonth = new Date(year, month + 1, 0).getDate()
         let daysInPrevMonth = new Date(year, month, 0).getDate()
 
         for (let row = 0; row < 6; row++) {
-            let dateInRow = new Date(year, month, 1 + (row * 7) - startCell)
+            // ISO week number of the Monday in this Sunday-first row
+            let dateInRow = new Date(year, month, 1 + (row * 7) - startCell + 1)
             let d = new Date(Date.UTC(dateInRow.getFullYear(), dateInRow.getMonth(), dateInRow.getDate()));
             d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
             let yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
