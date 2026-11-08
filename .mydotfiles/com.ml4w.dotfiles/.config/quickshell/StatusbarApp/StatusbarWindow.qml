@@ -513,6 +513,14 @@ PanelWindow {
         }
     }
     Component {
+        id: cReboot
+        RebootModule {
+            // Rebuild the keyboard navigation list when the module hides or
+            // reappears (it only shows while a reboot is needed).
+            onCollapsedChanged: Qt.callLater(root.rebuildNavItems)
+        }
+    }
+    Component {
         id: cBattery
         BatteryModule {
             // Rebuild the keyboard navigation list when the module hides or
@@ -533,6 +541,7 @@ PanelWindow {
         "logo":       cLogo,
         "power":      cPower,
         "updates":      cUpdates,
+        "reboot":       cReboot,
         "volume":       cVolume,
         "battery":      cBattery,
         "powerprofile": cPowerProfile
@@ -1095,7 +1104,9 @@ PanelWindow {
             anchors.right: parent.right
             anchors.rightMargin: 16
             anchors.verticalCenter: parent.verticalCenter
-            spacing: 14
+            // Tighter than the left/center areas (14): ~30% less so the
+            // crowded right side fits better.
+            spacing: 10
 
             opacity: pill.expanded ? 1 : 0
             visible: opacity > 0

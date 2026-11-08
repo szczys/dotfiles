@@ -19,7 +19,7 @@
     "modules": {
         "left": ["terminal", "workspaces"],
         "center": ["window"],
-        "right": ["updates", "battery", "powerprofile", "volume", "systemtray", "logo", "swaync", "power", "clock"]
+        "right": ["updates", "reboot", "battery", "powerprofile", "volume", "systemtray", "logo", "swaync", "power", "clock"]
     },
     "window": {
         "rewrite": {

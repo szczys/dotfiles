@@ -31,7 +31,7 @@ change. The statusbar writes enabled / alwaysExpanded / autohide back into it.
     "modules": {
         "left":   ["terminal", "workspaces"],
         "center": ["launcher", "clock", "swaync"],
-        "right":  ["updates", "battery", "powerprofile", "volume", "systemtray", "logo", "power"]
+        "right":  ["updates", "reboot", "battery", "powerprofile", "volume", "systemtray", "logo", "power"]
     },
     "border": {
         "width": 2,
