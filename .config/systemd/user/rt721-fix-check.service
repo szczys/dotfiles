@@ -1,0 +1,10 @@
+[Unit]
+Description=Check whether the PX13 RT721 headphone workaround is still needed
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/px13-audio/check-rt721-fix.sh
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,6 @@
+# Workaround: keep the RT721 headphone/headset codec from runtime-suspending.
+# On kernel 7.3.x it can't resume after suspend (ASoC error -61), so the
+# headphone output disappears. Fixed upstream by e32773a86100
+# "ASoC: rt721: Remove invalid register defaults". Remove this file once the
+# running kernel includes it. See ~/.config/px13-audio/README.md
+ACTION=="add", SUBSYSTEM=="soundwire", KERNEL=="sdw:*:025d:0721:*", ATTR{power/control}="on"
