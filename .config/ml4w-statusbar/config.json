@@ -32,5 +32,8 @@
     },
     "clock": {
         "format": "hh:mm AP"
+    },
+    "workspaces": {
+        "count": 4
     }
 }
